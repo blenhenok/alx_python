@@ -1,25 +1,25 @@
+#!/usr/bin/python3
+""" Script that uses JSONPlaceholder API to get information about employee """
 import requests
+import sys
 
-def get_employee_todo_progress(employee_id):
-    # Fetch employee details
-    employee_response = requests.get(f'https://jsonplaceholder.typicode.com/users/1')
-    employee = employee_response.json()
 
-    # Fetch employee's TODOs
-    todos_response = requests.get(f'https://jsonplaceholder.typicode.com/users/1/todos')
-    todos = todos_response.json()
+if __name__ == "__main__":
+    url = 'https://jsonplaceholder.typicode.com/'
 
-    # Calculate the progress
-    total_tasks = len(todos)
-    done_tasks = len([todo for todo in todos if todo['completed']])
-    
-    # Display the progress
-    print(f'Employee {employee["name"]} is done with tasks({done_tasks}/{total_tasks}):')
-    
-    # Display the titles of completed tasks
-    for todo in todos:
-        if todo['completed']:
-            print('\t ' + todo['title'])
+    user = '{}users/{}'.format(url, sys.argv[1])
+    res = requests.get(user)
+    json_o = res.json()
+    print("Employee {} is done with tasks".format(json_o.get('name')), end="")
 
-# Test the function with an example employee ID
-get_employee_todo_progress(1)
+    todos = '{}todos?userId={}'.format(url, sys.argv[1])
+    res = requests.get(todos)
+    tasks = res.json()
+    l_task = []
+    for task in tasks:
+        if task.get('completed') is True:
+            l_task.append(task)
+
+    print("({}/{}):".format(len(l_task), len(tasks)))
+    for task in l_task:
+        print("\t {}".format(task.get("title")))
