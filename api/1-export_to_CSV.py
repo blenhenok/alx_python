@@ -30,8 +30,8 @@ if __name__ == "__main__":
                        task.get('title')])
 
     # Write data to CSV file
-    filename = '{}.csv'.format(userid)
-    with open(filename, mode='r') as employee_file:
+    filename = '{}.csv'.format(USER_ID)
+    with open(filename, mode='w') as employee_file:
         employee_writer = csv.writer(employee_file,
                                      delimiter=',',
                                      quotechar='"',
