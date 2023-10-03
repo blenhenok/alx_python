@@ -14,7 +14,7 @@ if __name__ == "__main__":
     user = '{}users/{}'.format(url, userid)
     res = requests.get(user)
     json_o = res.json()
-    name = json_o.get('username')  # Store username
+    username = json_o.get('username')  # Store username
 
     # Fetch todos for user from API
     todos = '{}todos?userId={}'.format(url, userid)
@@ -25,7 +25,7 @@ if __name__ == "__main__":
     l_task = []
     for task in tasks:
         l_task.append([userid,
-                       name,
+                       username,
                        task.get('completed'),
                        task.get('title')])
 
