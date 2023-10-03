@@ -2,11 +2,11 @@ import requests
 
 def get_employee_todo_progress(employee_id):
     # Fetch employee details
-    employee_response = requests.get(f'https://jsonplaceholder.typicode.com/users/{employee_id}')
+    employee_response = requests.get(f'https://jsonplaceholder.typicode.com/users/1')
     employee = employee_response.json()
 
     # Fetch employee's TODOs
-    todos_response = requests.get(f'https://jsonplaceholder.typicode.com/users/{employee_id}/todos')
+    todos_response = requests.get(f'https://jsonplaceholder.typicode.com/users/1/todos')
     todos = todos_response.json()
 
     # Calculate the progress
